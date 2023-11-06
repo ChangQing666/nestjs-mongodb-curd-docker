@@ -58,27 +58,27 @@ jobs:
         # connection_url: ${{secrets.MAIL_CONNECTION}}
         # connection_url: smtp://cqfeefun@163.com:c@y0523.com@smtp.163.com:465
         # Required mail server address if not connection_url:
-         server_address: smtp.163.com
+          server_address: smtp.163.com
         # Server port, default 25:
-         server_port: 465
+          server_port: 465
         # Optional whether this connection use TLS (default is true if server_port is 465)
-         secure: true
+          secure: true
         # Optional (recommended) mail server username:
-         username: ${{secrets.MAIL_USERNAME}}
+          username: ${{secrets.MAIL_USERNAME}}
         # Optional (recommended) mail server password:
-         password: ${{secrets.MAIL_PASSWORD}}
+          password: ${{secrets.MAIL_PASSWORD}}
         # Required mail subject:
-         subject: Github Actions job result
+          subject: Github Actions job result
         # Required recipients' addresses:
-         to: cqfeefun@163.com,xlchang2016@163.com
+          to: cqfeefun@163.com,xlchang2016@163.com
         # Required sender full name (address can be skipped):
-         from: cqfeefun@163.com # <user@example.com>
+          from: cqfeefun@163.com # <user@example.com>
         # Optional plain body:
-         body: WOW ! Build job of ${{github.repository}} completed successfully!
+          body: WOW ! Build job of ${{github.repository}} completed successfully!
         # Optional HTML body read from file:
         # html_body: file://README.html
         # Optional carbon copy recipients:
-         cc: cqfeetop@163.com
+          cc: cqfeetop@163.com
         # Optional blind carbon copy recipients:
         # bcc: cqfeetop@126.com
         # Optional recipient of the email response:
@@ -92,4 +92,4 @@ jobs:
         # Optional attachments:
         # attachments: attachments.zip,git.diff,./dist/static/*.js
         # Optional priority: 'high', 'normal' (default) or 'low'
-         priority: high
+          priority: high
