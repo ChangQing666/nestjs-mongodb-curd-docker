@@ -36,6 +36,7 @@ jobs:
     # SSH User password  用户密码
           password: ${{ secrets.PASSWORD }}
           script: | # 重启更新镜像
+            cd /root/server/nestjs-mongodb-curd-docker
             docker ps -a 
             docker-compose up -d
 
