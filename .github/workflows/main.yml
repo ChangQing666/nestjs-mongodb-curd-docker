@@ -24,7 +24,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      - name: copy file via ssh key
+      - name: run docker via ssh key
         uses: appleboy/ssh-action@v0.1.10
         with:
     # SSH address  服务器地址
@@ -37,7 +37,7 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           script: | # 重启更新镜像
             docker ps -a 
-            docker compose up -d
+            docker-compose up -d
 
     # 发送邮件   
       - name: Send mail
