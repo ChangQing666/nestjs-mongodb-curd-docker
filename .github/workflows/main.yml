@@ -38,7 +38,10 @@ jobs:
           script: | # 重启更新镜像
             cd /root/server/nestjs-mongodb-curd-docker
             docker ps -a 
+            docker-compose down
+            docker ps -a
             docker-compose up -d
+            docker ps -a
 
     # 发送邮件   
       - name: Send mail
