@@ -1,0 +1,90 @@
+# This is a basic workflow to help you get started with Actions
+ 
+name: nestjs-mongodb-curd-docker
+ 
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ feat/1.0 ]
+ 
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+ 
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+ 
+    # Steps represent a sequence of tasks that will be executed as part of the 
+ 
+#关键配置
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      - name: copy file via ssh key
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+    # SSH address  服务器地址
+          host: ${{ secrets.REMOTE_HOST }}
+    # SSH Port  服务器端口
+          port: ${{ secrets.PORT }} 
+    # SSH User name   用户名
+          username: ${{ secrets.USER_NAME }}
+    # SSH User password  用户密码
+          password: ${{ secrets.PASSWORD }}
+          script: | # 重启更新镜像
+            docker ps -a 
+            docker compose up -d
+
+    # 发送邮件   
+      - name: Send mail
+        uses: dawidd6/action-send-mail@v3
+        with:
+        # Specify connection via URL (replaces server_address, server_port, secure,
+        # username and password)
+        #
+        # Format:
+        #
+        #  * smtp://user:password@server:port
+        #  * smtp+starttls://user:password@server:port
+         connection_url: ${{secrets.MAIL_CONNECTION}}
+        # connection_url: smtp://cqfeefun@163.com:c@y0523.com@smtp.163.com:465
+        # Required mail server address if not connection_url:
+         server_address: smtp.163.com
+        # Server port, default 25:
+         server_port: 465
+        # Optional whether this connection use TLS (default is true if server_port is 465)
+         secure: true
+        # Optional (recommended) mail server username:
+         username: ${{secrets.MAIL_USERNAME}}
+        # Optional (recommended) mail server password:
+         password: ${{secrets.MAIL_PASSWORD}}
+        # Required mail subject:
+         subject: Github Actions job result
+        # Required recipients' addresses:
+         to: cqfee@163.com,xlchang2016@163.com
+        # Required sender full name (address can be skipped):
+         from: Luke Skywalker # <user@example.com>
+        # Optional plain body:
+         body: Build job of ${{github.repository}} completed successfully!
+        # Optional HTML body read from file:
+        # html_body: file://README.html
+        # Optional carbon copy recipients:
+         cc: cqfeetop@163.com
+        # Optional blind carbon copy recipients:
+         bcc: cqfeetop@126.com
+        # Optional recipient of the email response:
+         reply_to: luke@example.com
+        # Optional Message ID this message is replying to:
+         in_reply_to: <random-luke@example.com>
+        # Optional unsigned/invalid certificates allowance:
+         ignore_cert: true
+        # Optional converting Markdown to HTML (set content_type to text/html too):
+         convert_markdown: true
+        # Optional attachments:
+        # attachments: attachments.zip,git.diff,./dist/static/*.js
+        # Optional priority: 'high', 'normal' (default) or 'low'
+         priority: low
