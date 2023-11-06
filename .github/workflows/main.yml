@@ -37,6 +37,7 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           script: | # 重启更新镜像
             cd /root/server/nestjs-mongodb-curd-docker
+            git pull
             docker ps -a 
             docker-compose down
             docker ps -a
