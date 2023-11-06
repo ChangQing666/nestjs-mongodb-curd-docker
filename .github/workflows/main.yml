@@ -55,7 +55,7 @@ jobs:
         #
         #  * smtp://user:password@server:port
         #  * smtp+starttls://user:password@server:port
-         connection_url: ${{secrets.MAIL_CONNECTION}}
+        # connection_url: ${{secrets.MAIL_CONNECTION}}
         # connection_url: smtp://cqfeefun@163.com:c@y0523.com@smtp.163.com:465
         # Required mail server address if not connection_url:
          server_address: smtp.163.com
@@ -70,9 +70,9 @@ jobs:
         # Required mail subject:
          subject: Github Actions job result
         # Required recipients' addresses:
-         to: cqfee@163.com,xlchang2016@163.com
+         to: cqfeefun@163.com,xlchang2016@163.com
         # Required sender full name (address can be skipped):
-         from: Luke Skywalker # <user@example.com>
+         from: cqfeefun@163.com # <user@example.com>
         # Optional plain body:
          body: WOW ! Build job of ${{github.repository}} completed successfully!
         # Optional HTML body read from file:
@@ -80,16 +80,16 @@ jobs:
         # Optional carbon copy recipients:
          cc: cqfeetop@163.com
         # Optional blind carbon copy recipients:
-         bcc: cqfeetop@126.com
+        # bcc: cqfeetop@126.com
         # Optional recipient of the email response:
-         reply_to: luke@example.com
+        # reply_to: luke@example.com
         # Optional Message ID this message is replying to:
-         in_reply_to: <random-luke@example.com>
+        # in_reply_to: <random-luke@example.com>
         # Optional unsigned/invalid certificates allowance:
-         ignore_cert: true
+        # ignore_cert: true
         # Optional converting Markdown to HTML (set content_type to text/html too):
-         convert_markdown: true
+        # convert_markdown: true
         # Optional attachments:
         # attachments: attachments.zip,git.diff,./dist/static/*.js
         # Optional priority: 'high', 'normal' (default) or 'low'
-         priority: low
+         priority: high
