@@ -1,13 +1,17 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Inject } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './schemas/user.schema';
 import { ValidationPipe } from 'src/common/pipe/validation.pipe';
+import { WINSTON_LOGGER_TOKEN } from 'src/winston/winston.module';
 
 @Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) { }
+
+  @Inject(WINSTON_LOGGER_TOKEN)
+  private logger;
 
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
@@ -17,6 +21,7 @@ export class UserController {
 
   @Get()
   findAll(): Promise<User[]> {
+    this.logger.log('hello', UserController.name);
     return this.userService.findAll();
   }
 

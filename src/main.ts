@@ -2,6 +2,8 @@ import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import { ValidationPipe } from './common/pipe/validation.pipe';
+import { MyLogger } from './winston/Mylogger';
+import { WINSTON_LOGGER_TOKEN } from './winston/winston.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
@@ -18,6 +20,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
+  app.useLogger(app.get(WINSTON_LOGGER_TOKEN));
 
   await app.listen(3000);
   console.log(`Application is running on: ${await app.getUrl()}`);
