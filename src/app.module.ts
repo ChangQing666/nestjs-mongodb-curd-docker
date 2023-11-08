@@ -1,4 +1,4 @@
-import { Module, NestModule, RequestMethod, MiddlewareConsumer } from '@nestjs/common';
+import { Module, NestModule, RequestMethod, MiddlewareConsumer, ValidationPipe } from '@nestjs/common';
 // import { LoggerMiddleware } from './common/middleware/logger.middleware';
 import { logger } from './common/middleware/logger.middleware';
 import { UserModule } from './user/user.module';
@@ -9,6 +9,8 @@ import { WinstonModule } from './winston/winston.module';
 import { transports, format } from 'winston';
 import * as chalk from 'chalk';
 import 'winston-daily-rotate-file';
+import { APP_PIPE } from '@nestjs/core';
+
 
 @Module({
   imports: [
@@ -47,7 +49,12 @@ import 'winston-daily-rotate-file';
     })
   ],
   // imports: [MongooseModule.forRoot('mongodb://mongodb/user'), UserModule, MenuModule], // docker
-
+  providers: [
+    {
+      provide: APP_PIPE,
+      useClass: ValidationPipe
+    }
+  ]
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
